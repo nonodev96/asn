@@ -2,7 +2,7 @@
 
 <?php $this->section('page_title') ?>Ejemplo 2 inseguro<?php $this->endSection() ?>
 
-<?php $this->section('links') ?>
+<?php $this->section('head') ?>
 <?php $this->endSection() ?>
 
 <?php $this->section('content') ?>
@@ -10,8 +10,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <h1><?php $this->renderSection('page_title') ?></h1>
-            <h2>Prevención de inyección SQL</h2>
+            <h2>Prevención insegura de inyección SQL</h2>
         </div>
         <div class="col-md-2"></div>
     </div>

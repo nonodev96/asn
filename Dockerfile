@@ -2,9 +2,12 @@ FROM php:7.4-apache
 RUN apt-get -y update \
     && apt-get install -y libicu-dev \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl
+    && docker-php-ext-install intl \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-enable mysqli \
+    && docker-php-ext-install pdo_mysql
 
-COPY sites-available/site.conf /etc/apache2/sites-enabled/site.conf
+COPY .docker/php/sites-available/site.conf /etc/apache2/sites-enabled/site.conf
 RUN a2enmod rewrite
 RUN service apache2 restart
 

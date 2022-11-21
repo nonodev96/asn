@@ -39,16 +39,16 @@ $routes->get('/', 'Home::index');
 $routes->get('/Home', 'Home::index');
 
 $routes->get('/Example_1', 'Example_1::index');
+$routes->match(['get', 'post'], '/Example_1/secure', 'Example_1::secure');
 $routes->get('/Example_1/insecure', 'Example_1::insecure');
-$routes->get('/Example_1/secure', 'Example_1::secure');
 
 $routes->get('/Example_2', 'Example_2::index');
-$routes->get('/Example_2/insecure', 'Example_2::insecure');
 $routes->get('/Example_2/secure', 'Example_2::secure');
+$routes->get('/Example_2/insecure', 'Example_2::insecure');
 
 $routes->get('/Example_3', 'Example_3::index');
-$routes->get('/Example_3/insecure', 'Example_3::insecure');
 $routes->get('/Example_3/secure', 'Example_3::secure');
+$routes->get('/Example_3/insecure', 'Example_3::insecure');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

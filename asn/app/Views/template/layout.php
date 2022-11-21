@@ -10,7 +10,7 @@
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="/assets/css/styles.css" rel="stylesheet">
 
-    <?php $this->renderSection('links') ?>
+    <?php $this->renderSection('head') ?>
 
 </head>
 <body class="d-flex flex-column h-100">
