@@ -7,6 +7,15 @@ use CodeIgniter\Session\Handlers\FileHandler;
 
 class App extends BaseConfig
 {
+
+    public function __construct()
+    {
+        if ($_SERVER['SERVER_NAME'] == 'localhost') {
+            $this->baseURL = 'http://localhost:8080/';
+        } else {
+            $this->baseURL = 'https://' . $_SERVER['SERVER_NAME'] . '/';
+        }
+    }
     /**
      * --------------------------------------------------------------------------
      * Base Site URL
@@ -24,7 +33,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost:8080/';
+    public $baseURL = "";
 
     /**
      * --------------------------------------------------------------------------
