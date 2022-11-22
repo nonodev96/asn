@@ -7,7 +7,8 @@ RUN apt-get -y update \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-install pdo_mysql
 
-COPY .docker/php/sites-available/site.conf /etc/apache2/sites-enabled/site.conf
+COPY .docker/php/sites-available/site.conf /etc/apache2/sites-available/000-default.conf
+
 RUN a2enmod rewrite
 RUN service apache2 restart
 
@@ -22,3 +23,4 @@ RUN service apache2 restart
 # php8.1-curl        - lets you make HTTP requests in PHP
 # php8.1-xml         - for working with XML data
 # php8.1-bcmath      - used when working with precision floats
+# /etc/apache2/sites-available/site.conf
