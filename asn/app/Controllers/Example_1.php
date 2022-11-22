@@ -2,47 +2,58 @@
 
 namespace App\Controllers;
 use Config\Services;
-use App\Models\FormModelExample1;
+use App\Models\Example_1Model;
 
 class Example_1 extends BaseController
 {
+    protected $helpers = ["form"];
+
     public function index(): string
     {
         return view("pages/index");
     }
 
-    public function secure(): string
+    public function secure()
     {
-        helper('form');
-
-        $rules = [
-            'email'     => 'required|valid_email',
-            'password'  => 'required',
-        ];
-
-        if (strtolower($this->request->getMethod()) !== 'post') {
-            return view('pages/example1_secure', [
-                'validation' => Services::validation(),
-            ]);
-        }
-        if ($this->validate($rules)) {
-            $formModel = new FormModelExample1();
-            $data = [
-                'email'     => $this->request->getVar('email'),
-                'password'  => $this->request->getVar('password'),
+        $formModel = new Example_1Model();
+        $data['data'] = $formModel->fetch_all_example_1();
+        if (strtolower($this->request->getMethod()) === 'post') {
+        
+            $rules = [
+                'title'     => 'required|min_length[5]',
+                'message'   => 'required|min_length[10]',
             ];
-            $formModel->save($data);
-            return redirect()->to('/Example_1/secure');
-        } else {
-            $data['validation'] = $this->validator;
+        
+            if ($this->validate($rules)) {
+                $formModel->save([
+                    'title'     => $this->request->getVar('title'),
+                    'message'   => $this->request->getVar('message'),
+                ]);
+                return redirect()->route('Example_1::secure');
+            }
+            $data["validation"] = $this->validator;
+            // return redirect()
+            //     ->route('Example_1::secure')
+            //     ->withInput()
+            //     ->with('validation',  $this->validator);
             return view('pages/example1_secure', $data);
-        }        
+        }       
+        return view('pages/example1_secure', $data);
     }
 
 
-    public function insecure(): string
+    public function insecure()
     {
-        return view('pages/example1_insecure');
+        $formModel = new Example_1Model();
+        $data['data'] = $formModel->fetch_all_example_1();
+        if (strtolower($this->request->getMethod()) === 'post') {
+            $formModel->save([
+                'title'     => $this->request->getVar('title'),
+                'message'   => $this->request->getVar('message'),
+            ]);
+            return redirect()->route('Example_1::insecure');
+        }
+        return view('pages/example1_insecure', $data);
     }
 
 }
