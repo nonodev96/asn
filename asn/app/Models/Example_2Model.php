@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Example2 extends Model
+class Example_2Model extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'example_2';
@@ -14,7 +14,11 @@ class Example2 extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        "example_2_id",
+        "title",
+        "message"
+    ];
 
     // Dates
     protected $useTimestamps = false;
@@ -39,4 +43,9 @@ class Example2 extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function fetch_all_example_2(): array
+    {
+        return $this->findAll();
+    }
 }
