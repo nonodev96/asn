@@ -8,13 +8,13 @@ url [localhost](http://localhost:80)
 
 ![Inicio](assets/Img-1.png)
 
+Se ha configurado el despligue de forma que no sea necesario instalar nada y ya tenga todas las dependecias necesarias.
+
 ---
 
 A continuación, al desplegar la web podemos ver las 3 secciones, pero antes de ello debemos realizar la migración de la base de datos.
 
 Para ello debemos introducirnos en la consola de la instancia desde docker y realizar la migración con el siguiente comando.
-
-He configurado el despligue de forma que no sea necesario instalar nada y ya tenga todas las dependecias necesarias.
 
 ```bash
 cd asn
@@ -89,7 +89,7 @@ Estos son ejemplos de control, validación y protección muy básicos, para prot
 
 Para el ejemplo 1 inseguro se nos exige que el titulo y el mensaje a introducir debe tener una longitud de 5 y 10 caracteres correspondientemente.
 
-Hemos usado los métodos que nos propociona codeigniter, puede revisar el código en 'App/Controllers/Example_1'.
+Hemos usado los métodos que nos propociona codeigniter, puede revisar el código en `App/Controllers/Example_1`.
 
 
 ```php
@@ -147,7 +147,7 @@ return view('pages/example2_insecure', $data);
 
 ## Ejemplo 3
 
-Para desactivar el CSRF Protection en el ejemplo 3 debemos ir a 'App/Config/Filters' y añadimos la siguiente excepción:
+Para desactivar el CSRF Protection en el ejemplo 3 debemos ir a `App/Config/Filters` y añadimos la siguiente excepción, aunque esto solo desactiva la protección y no es lo que queremos demostrar.
 
 ```php
 <?php
@@ -167,3 +167,17 @@ class Filters extends BaseConfig
     // ...
 }
 ```
+
+Lo que debemos hacer es no usar la protección csrf, ya que los formularios que proporciona CodeIgniter 4 incluyen un campo oculto que envia el token de protección.
+
+![Protección desactivada](assets/Img-4.png)
+
+![Protección activada](assets/Img-5.png)
+
+El mensaje de error nos informa mediante un flash de CodeIgniter 4
+
+![Ejemplo flash](assets/Img-6.png)
+
+![Ejemplo inseguro con la protección csrf](assets/Img-6-inseguro-con-csrf-activado.png)
+
+
