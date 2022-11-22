@@ -41,7 +41,6 @@ class Example_2 extends BaseController
     {
         $formModel = new Example_2Model();
         $data['data'] = $formModel->fetch_all_example_2();
-
         if (strtolower($this->request->getMethod()) === 'post') {
             // Este método ya protege ante inyecciones SQL, aunque podemos poner muchas más medidas de protección
             $formModel->save([

@@ -18,12 +18,10 @@ class Example_1 extends BaseController
         $formModel = new Example_1Model();
         $data['data'] = $formModel->fetch_all_example_1();
         if (strtolower($this->request->getMethod()) === 'post') {
-        
             $rules = [
                 'title'     => 'required|min_length[5]',
                 'message'   => 'required|min_length[10]',
             ];
-        
             if ($this->validate($rules)) {
                 $formModel->save([
                     'title'     => $this->request->getVar('title'),
@@ -32,11 +30,6 @@ class Example_1 extends BaseController
                 return redirect()->route('Example_1::secure');
             }
             $data["validation"] = $this->validator;
-            // return redirect()
-            //     ->route('Example_1::secure')
-            //     ->withInput()
-            //     ->with('validation',  $this->validator);
-            return view('pages/example1_secure', $data);
         }       
         return view('pages/example1_secure', $data);
     }

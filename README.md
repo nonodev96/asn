@@ -92,21 +92,13 @@ Para el ejemplo 1 inseguro se nos exige que el titulo y el mensaje a introducir 
 Hemos usado los métodos que nos propociona codeigniter, puede revisar el código en `App/Controllers/Example_1`.
 
 
-```php
-$rules = [
-    'title'     => 'required|min_length[5]',
-    'message'   => 'required|min_length[10]',
-];
+### Ejemplo 1 inseguro
 
-if ($this->validate($rules)) {
-    $formModel->save([
-        'title'     => $this->request->getVar('title'),
-        'message'   => $this->request->getVar('message'),
-    ]);
-    return redirect()->route('Example_1::secure');
-}
-$data["validation"] = $this->validator;
- ```
+![Código 1 inseguro](assets/Img-1-insecure-code.png)
+
+### Ejemplo 1 seguro
+
+![Código 1 seguro](assets/Img-1-secure-code.png)
 
 ---
 
@@ -120,28 +112,13 @@ En el ejemplo seguro hemos usado los métodos que nos propociona codeigniter, mi
 <script>console.log("hack")</script>
  ```
 
-```php
-$mysqli =  mysqli_connect(
-    $_SERVER["database.default.hostname"], 
-    $_SERVER["database.default.username"], 
-    $_SERVER["database.default.password"], 
-    $_SERVER["database.default.database"]
-);
-$result = $mysqli->query("SELECT * FROM `example_2`");
-// Para que sea un mapa con las columnas 
-$data["data"] = $result->fetch_all(MYSQLI_ASSOC); 
-if (strtolower($this->request->getMethod()) === 'post') {
-    // real_escape_string
-    $title = $this->request->getVar('title');
-    $message = $this->request->getVar('message');
-    // <script>console.log("hack")</script>
-    $query = "INSERT INTO example_2 (example_2_id, title, message) VALUES (NULL, '". $title ."', '". $message ."')";
-    $mysqli->query($query);
-    // d(mysqli_error($mysqli));
-    return redirect()->route('Example_2::insecure');
-}
-return view('pages/example2_insecure', $data);
-```
+### Ejemplo 2 inseguro
+
+![Código 2 inseguro](assets/Img-2-insecure-code.png)
+
+### Ejemplo 2 seguro
+
+![Código 2 seguro](assets/Img-2-secure-code.png)
 
 ---
 
